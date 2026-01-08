@@ -59,15 +59,12 @@ export const mazeIslandsNodeSchema = z.object({
 }).strict().transform(data => {
     return {
         id: data.id,
-        position: data.position,
-        cost: data.cost ? {
-            ep: data.cost.ep,
-        } : undefined,
+        cost: data.cost?.ep ?? 0,
         reward_id: data.reward_id,
         reward: data.reward ? data.reward.map(processReward) : undefined,
         is_highlighted: data.highlighted,
         key_path_id: data.key,
         encounter_id: data.encounter,
-        encounter_skip_cost: data.encounter_skip_cost?.ep,
+        encounter_skip_cost: data.encounter_skip_cost?.ep ?? null,
     }
 })

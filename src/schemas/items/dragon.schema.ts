@@ -113,9 +113,7 @@ export const dragonSchema = z.object({
             (element) => elementMap[element]
         ),
         description: data.description,
-        description_key: data.description
-            ? `tid_unit_${data.id}_description`
-            : null,
+        description_key: `tid_unit_${data.id}_description`,
         buy_price: processPrice(data.costs),
         sell_price: processPrice(data.sell_price),
         is_breedable: numberToBoolean(data.breedable),
@@ -126,6 +124,7 @@ export const dragonSchema = z.object({
         trainable_attack_ids: data.trainable_attacks,
         passive_skill_ids: data.passive_skills ?? null,
         post_skill_ids: data.post_skills ?? null,
+        category: data.category,
         stats: {
             attack: data.base_attack,
             life: data.base_life,
@@ -147,7 +146,6 @@ export const dragonSchema = z.object({
                 breeding_ngu_soft: data.breeding_time_ngu_soft,
             },
         },
-        deity_breeding: numberToBoolean(data.deity_breeding),
         production: {
             coins_added: data.coins_added,
             starting_coins: data.starting_coins,
