@@ -1,0 +1,74 @@
+export interface DragonDto {
+    id: number
+    name: string
+    group_type: string
+    name_key?: string
+    speed: number
+    mobile_version: number
+    android_version: number
+    display_order: number
+    hatching_time: number
+    breeding_time: number
+    xp: number
+    lvl: number
+    costs: {
+        g?: number
+        c?: number
+    }
+    sell_price: {
+        g: number
+    }
+    starting_coins: number
+    coins_added: number
+    can_breed: number
+    breedable: number
+    deity_breeding: number
+    difficulty: number
+    category: number
+    rarity: number
+    dragon_rarity: string
+    attacks: Array<number>
+    attributes: Array<string>
+    trainable_attacks: Array<number>
+    upgrade_levels: Array<number>
+    background_vfx: Array<number>
+    foreground_vfx: Array<number>
+    in_store: number
+    in_store_min_level: number
+    flying_level: number
+    swim: number
+    new_item: number
+    img_name?: string
+    img_name_mobile?: string
+    img_name_android?: string
+    giftable?: number
+    gift_level: number
+    description?: string
+    seeds_to_summon: number
+    hatching_time_10: number
+    breeding_time_40: number
+    breeding_time_10: number
+    hatching_time_40: number
+    base_attack: number
+    base_life: number
+    in_store_ch?: number
+    costs_ch_1?: {
+        c?: number
+        g?: number
+    }
+    costs_ch_2?: {
+        c?: number
+        g?: number
+    }
+    hatching_time_reawaken: number
+    breeding_time_reawaken: number
+    hatching_time_ngu_aggressive: number
+    breeding_time_ngu_aggressive: number
+    hatching_time_ngu_soft: number
+    breeding_time_ngu_soft: number
+    dragon_ownership_id: number
+    tags?: Array<string>
+    speed_override?: number
+    passive_skills?: Array<number>
+    post_skills?: Array<number>
+}

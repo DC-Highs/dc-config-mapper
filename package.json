@@ -1,0 +1,41 @@
+{
+  "name": "dc-config-mapper",
+  "version": "1.0.0",
+  "description": "A opined library to restructure and populate configuration for Dragon City.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/*",
+    "!/**/__tests__"
+  ],
+  "keywords": [
+    "dragon city",
+    "dc",
+    "configuration",
+    "dc highs"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Marcuth",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "@marcuth/env": "^0.0.1",
+    "@types/lodash": "^4.17.21",
+    "@types/node": "^25.0.3",
+    "@types/pluralize": "^0.0.33",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "pluralize": "^8.0.0",
+    "zod": "^4.3.5"
+  },
+  "peerDependencies": {
+    "@dchighs/dc-config": "^0.0.1",
+    "@dchighs/dc-localization": "^0.0.3"
+  }
+}

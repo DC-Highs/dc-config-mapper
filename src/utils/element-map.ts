@@ -1,0 +1,26 @@
+import { elementSettings, DragonElement } from "@dchighs/dc-core"
+
+export const elementMap: Record<string, DragonElement> = {
+    [elementSettings.terra.acronym]: DragonElement.Terra,
+    [elementSettings.flame.acronym]: DragonElement.Flame,
+    [elementSettings.sea.acronym]: DragonElement.Sea,
+    [elementSettings.nature.acronym]: DragonElement.Nature,
+    [elementSettings.electric.acronym]: DragonElement.Electric,
+    [elementSettings.ice.acronym]: DragonElement.Ice,
+    [elementSettings.metal.acronym]: DragonElement.Metal,
+    [elementSettings.dark.acronym]: DragonElement.Dark,
+    [elementSettings.light.acronym]: DragonElement.Light,
+    [elementSettings.war.acronym]: DragonElement.War,
+    [elementSettings.pure.acronym]: DragonElement.Pure,
+    [elementSettings.legend.acronym]: DragonElement.Legend,
+    [elementSettings.primal.acronym]: DragonElement.Primal,
+    [elementSettings.wind.acronym]: DragonElement.Wind,
+    [elementSettings.time.acronym]: DragonElement.Time,
+    [elementSettings.happy.acronym]: DragonElement.Happy,
+    [elementSettings.chaos.acronym]: DragonElement.Chaos,
+    [elementSettings.magic.acronym]: DragonElement.Magic,
+    [elementSettings.soul.acronym]: DragonElement.Soul,
+    [elementSettings.beauty.acronym]: DragonElement.Beauty,
+    [elementSettings.dream.acronym]: DragonElement.Dream,
+    [elementSettings.physical.acronym]: DragonElement.Physical,
+}
