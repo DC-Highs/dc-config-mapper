@@ -1,7 +1,7 @@
 import { GameConfigDto } from "@dchighs/dc-config"
 import { z } from "zod"
 
-import { RewardResourceType } from "../../../enums/reward-resource-type"
+import { RewardResourceType } from "../../../enums/reward-resource-type.enum"
 
 type Reward = GameConfigDto["game_data"]["config"]["maze_island"]["rewards"][number]["reward"][number]
 

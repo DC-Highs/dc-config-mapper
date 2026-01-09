@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { elementMap } from "../../utils/element-map"
+import { elementMap } from "../../utils/element-map.util"
 
 export const attackSchema = z.object({
     id: z.number(),

@@ -52,7 +52,6 @@ export const mazeIslandSchema = z.object({
         },
         initial_points: data.initial_points,
         min_level: data.min_level,
-        building_id: data.building_id,
         mobile_tutorial_id: data.mobile_tutorial_id,
         zip_file_name: path.basename(data.zip_file),
         sound_tag: data.sound_tag,

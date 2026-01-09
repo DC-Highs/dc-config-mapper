@@ -1,3 +1,3 @@
-export * from "./number-to-boolean"
-export * from "./record-keys-conversor"
-export * from "./element-map"
+export * from "./number-to-boolean.util"
+export * from "./record-keys-conversor.util"
+export * from "./element-map.util"

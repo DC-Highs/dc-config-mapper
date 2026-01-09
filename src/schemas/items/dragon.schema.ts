@@ -1,7 +1,7 @@
 import { z } from "zod"
 
-import { numberToBoolean } from "../../utils/number-to-boolean"
-import { elementMap } from "../../utils/element-map"
+import { numberToBoolean } from "../../utils/number-to-boolean.util"
+import { elementMap } from "../../utils/element-map.util"
 import { CostType } from "../../enums"
 
 const processPrice = (priceObj: Record<string, number>) => {

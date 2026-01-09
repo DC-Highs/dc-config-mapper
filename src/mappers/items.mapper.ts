@@ -5,6 +5,7 @@ import { groupBy } from "lodash"
 import { recordKeysConversor } from "../utils"
 import { RestructuredItemsDto } from "../dtos/items"
 import { dragonSchema } from "../schemas/items/dragon.schema"
+import { buildingSchema } from "../schemas/items/building.schema"
 
 export class ItemsMapper {
     constructor(readonly localization: Localization) { }
@@ -32,7 +33,7 @@ export class ItemsMapper {
 
         return {
             alliance_portals: result.alliance_portals.map(portal => this.localization.translate(portal)),
-            buildings: result.buildings.map(building => this.localization.translate(building)),
+            buildings: result.buildings.map(building => this.localization.translate(buildingSchema.parse(building))),
             boosters: result.boosters.map(booster => this.localization.translate(booster)),
             collectibles: result.collectibles.map(collectible => this.localization.translate(collectible)),
             collectislands: result.collectislands.map(collect_island => this.localization.translate(collect_island)),

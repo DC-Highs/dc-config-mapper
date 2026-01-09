@@ -1,0 +1,134 @@
+import { z } from "zod"
+
+import { numberToBoolean } from "../../utils"
+import { CostType } from "../../enums"
+
+const processPrice = (priceObj: Record<string, number>) => {
+    const keys = Object.keys(priceObj)
+
+    if (keys.length === 0) return null
+
+    if (keys.length > 1) {
+        throw new Error(`Unexpected multiple price keys: ${JSON.stringify(priceObj)}`)
+    }
+
+    const key = keys[0]
+    const amount = priceObj[key]
+
+    const typeMap: Record<string, string> = {
+        [CostType.Gold]: "gold",
+        [CostType.Gem]: "gem",
+    }
+
+    if (!typeMap[key]) {
+        throw new Error(`Unexpected price key: ${key}`)
+    }
+
+    return {
+        type: typeMap[key],
+        amount: amount,
+    }
+}
+
+export const decoSchema = z.object({
+    id: z.number(),
+    name: z.string(),
+    group_type: z.string(),
+    name_key: z.string().optional(),
+    animated: z.number(),
+    build_time: z.number(),
+    mobile_version: z.number(),
+    android_version: z.number(),
+    show_on_mobile: z.number(),
+    type: z.string(),
+    xp: z.number(),
+    min_level: z.number(),
+    costs: z.object({
+        c: z.number().optional(),
+        g: z.number().optional(),
+    }),
+    display_order: z.number(),
+    boost_modifier: z.number(),
+    gift_level: z.number(),
+    giftable: z.number(),
+    collect: z.number(),
+    category_id: z.number(),
+    subcategory_id: z.number(),
+    building_limit_same_id: z.number(),
+    in_store: z.number(),
+    width: z.number(),
+    height: z.number(),
+    new_item: z.number(),
+    img_name: z.string(),
+    img_name_mobile: z.string(),
+    img_name_android: z.string(),
+    inventory_ids: z.number().optional(),
+    upgrades_to: z.number(),
+    collect_type: z.any(),
+    velocity: z.number().optional(),
+    description: z.string().optional(),
+    sell_price: z.object({
+        g: z.number().optional(),
+    }).optional(),
+    properties: z.object({
+        bulldozable: z.number().optional(),
+        floating: z.number().optional(),
+        capacity: z.number().optional(),
+        incubator: z.number().optional(),
+        friend_assistable: z.number().optional(),
+        fixed_position: z.array(z.number()).optional(),
+        upgrade_from: z.number().optional(),
+        is_fixed: z.number().optional(),
+        max_gold: z.number().optional(),
+        crosspromotion: z.number().optional(),
+        demolishable: z.number().optional(),
+    }).optional(),
+    building_ownership_id: z.number(),
+    cost_unit_cash: z.number().optional(),
+    activation: z.number().optional(),
+    element_type: z.string().optional(),
+    collect_xp: z.number().optional(),
+    elements: z.array(z.string()).optional(),
+    multiple_costs: z.array(z.object({
+        c: z.number(),
+    })).optional(),
+    animated_canvas: z.string().optional(),
+}).strict().transform((data) => {
+    return {
+        id: data.id,
+        name: data.name,
+        name_key: data.name_key,
+        build_time: data.build_time,
+        type: data.type,
+        element_type: data.element_type,
+        xp_on_build: data.xp,
+        min_level: data.min_level,
+        buy_price: processPrice(data.costs),
+        sell_price: data.sell_price ? processPrice(data.sell_price) : null,
+        display_order: data.display_order,
+        boost_modifier: data.boost_modifier,
+        cost_unit_cash: data.cost_unit_cash,
+        collect: data.collect,
+        collect_xp: data.collect_xp,
+        category_id: data.category_id,
+        subcategory_id: data.subcategory_id,
+        building_limit_same_id: data.building_limit_same_id,
+        in_store: numberToBoolean(data.in_store),
+        width: data.width,
+        height: data.height,
+        is_new_item: numberToBoolean(data.new_item),
+        imageNames: {
+            default: data.img_name,
+            mobile: data.img_name_mobile,
+            android: data.img_name_android,
+        },
+        activation: data.activation,
+        upgrades_to: data.upgrades_to,
+        collect_type: data.collect_type,
+        velocity: data.velocity,
+        description: data.description,
+        properties: data.properties,
+        building_ownership_id: data.building_ownership_id,
+        inventory_ids: data.inventory_ids,
+    }
+})

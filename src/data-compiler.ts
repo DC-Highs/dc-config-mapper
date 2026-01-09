@@ -113,14 +113,14 @@ export class DataCompiler {
 
                 const matchedPrefix = this.findMatchingPrefix(key)
 
-                if (key.endsWith(this.idsSuffix)) {
+                if (key.endsWith(this.idsSuffix) && Array.isArray(value)) {
                     this.processIdsSuffix({
                         data: data,
                         key: key,
                         prefix: matchedPrefix,
                         context: context
                     })
-                } else if (key.endsWith(this.idSuffix)) {
+                } else if (key.endsWith(this.idSuffix) && value) {
                     this.processIdSuffix({
                         data: data,
                         key: key,
@@ -135,7 +135,8 @@ export class DataCompiler {
             console.error("Error while compiling data:", error)
             console.log("Data:", data)
             console.log("Data Copy:", dataCopy)
-            process.exit(1)
+            console.log("Context keys:", Object.keys(context))
+            throw error
         }
     }
 }

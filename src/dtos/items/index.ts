@@ -1,2 +1,2 @@
-export * from "./dragon"
-export * from "./restructured-items"
+export * from "./dragon.dto"
+export * from "./restructured-items.dto"

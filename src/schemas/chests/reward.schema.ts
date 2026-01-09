@@ -1,8 +1,8 @@
 import { GameConfigDto } from "@dchighs/dc-config"
 import { z } from "zod"
 
-import { RewardResourceType } from "../../enums/reward-resource-type"
-import { elementMap } from "../../utils/element-map"
+import { RewardResourceType } from "../../enums/reward-resource-type.enum"
+import { elementMap } from "../../utils/element-map.util"
 
 type RewardResouceDto = GameConfigDto["game_data"]["config"]["chests"]["rewards"][number]["reward"]["resource"]
 
@@ -107,7 +107,7 @@ export const chestRewardSchema = z.object({
 }).strict().transform((data) => {
     const reward = {
         resource: data.reward.resource ? processReward(data.reward.resource) : undefined,
-        buildings_ids: data.reward.buildings,
+        building_ids: data.reward.buildings,
         eggs_ids: data.reward.eggs,
         seeds: data.reward.seeds,
         moves: data.reward.moves,

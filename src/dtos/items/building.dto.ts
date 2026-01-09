@@ -1,0 +1,64 @@
+export interface BuildingDto {
+    id: number
+    name: string
+    group_type: string
+    name_key?: string
+    animated: number
+    build_time: number
+    mobile_version: number
+    android_version: number
+    show_on_mobile: number
+    type: string
+    element_type?: string
+    xp: number
+    min_level: number
+    costs: {
+        c?: number
+        g?: number
+    }
+    display_order: number
+    boost_modifier: number
+    gift_level: number
+    giftable: number
+    cost_unit_cash?: number
+    collect: number
+    collect_xp?: number
+    category_id: number
+    subcategory_id: number
+    building_limit_same_id: number
+    in_store: number
+    width: number
+    height: number
+    new_item: number
+    img_name: string
+    img_name_mobile: string
+    img_name_android: string
+    activation: number
+    upgrades_to: number
+    collect_type: any
+    velocity: number
+    description?: string
+    properties: {
+        capacity?: number
+        incubator?: number
+        bulldozable?: number
+        max_dragon_level?: number
+        required_items?: Array<number>
+        workingBuilding?: number
+        breeding?: number
+        breeding_factor?: number
+        max_gold?: number
+        friend_assistable?: number
+        upgrade_from?: number
+        floating?: number
+        fixed_position?: Array<number>
+        is_fixed?: number
+        crosspromotion?: number
+        ft_flying?: number
+    }
+    building_ownership_id: number
+    sell_price?: {
+        g?: number
+    }
+    inventory_ids?: number
+}
