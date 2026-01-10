@@ -16,12 +16,14 @@ export class TowerIslandsMapper {
             islands: data.islands.map(island => {
                 const squareIds = data.squares.filter(square => square.island_id === island.id).map(square => square.id)
                 const floorIds = data.floors.filter(floor => floor.island_id === island.id).map(floor => floor.id)
+                const rewardIds = data.rewards.filter(reward => reward.island_id === island.id).map(reward => reward.id)
 
                 return this.localization.translate(
                     towerIslandSchema.parse({
                         ...island,
                         square_ids: squareIds,
-                        floor_ids: floorIds
+                        floor_ids: floorIds,
+                        reward_ids: rewardIds,
                     })
                 )
             }),

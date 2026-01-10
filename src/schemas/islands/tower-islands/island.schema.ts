@@ -39,6 +39,7 @@ export const towerIslandSchema = z.object({
     // injected properties
     square_ids: z.array(z.number()),
     floor_ids: z.array(z.number()),
+    reward_ids: z.array(z.number()),
 }).strict().transform(data => {
     return {
         id: data.id,
@@ -62,6 +63,7 @@ export const towerIslandSchema = z.object({
         help_view_id: data.help_view_id,
         square_ids: data.square_ids,
         floor_ids: data.floor_ids,
+        reward_ids: data.reward_ids,
     }
 })
     
