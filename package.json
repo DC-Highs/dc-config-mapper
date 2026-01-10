@@ -1,6 +1,6 @@
 {
   "name": "@dchighs/dc-config-mapper",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A opined library to restructure and populate configuration for Dragon City.",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
