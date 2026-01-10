@@ -19,12 +19,14 @@ export type CompileArrayOptions = {
 
 type ProcessIdsSuffixOptions = {
     data: Record<string, any>
+    dataCopy: Record<string, any>
     key: string
     prefix: string
     context: Record<string, any>
 }
 type ProcessIdSuffixOptions = {
     data: Record<string, any>
+    dataCopy: Record<string, any>
     key: string
     prefix: string
     context: Record<string, any>
@@ -58,17 +60,31 @@ export class DataCompiler {
     private processIdsSuffix({
         context,
         data,
+        dataCopy,
         key,
         prefix
     }: ProcessIdsSuffixOptions) {
         const baseKey = key.slice(prefix.length).slice(0, -this.idsSuffix.length)
         const pluralizedKey = pluralize(baseKey)
-    
+
         if (context[pluralizedKey]) {
-            const relatedItems = context[pluralizedKey]
-                .filter((item: any) => data[key].includes(item.id))
-                .map((item: any) => isObject(item) ? this.compile({ data: item, context: context }) : item)
-    
+            const idList = dataCopy[key] as number[]
+            const contextItems = context[pluralizedKey] as any[]
+
+            const relatedItems = idList
+                .map(id => {
+                    const foundItem = contextItems.find(item => item.id === id)
+
+                    if (!foundItem) {
+                        return null
+                    }
+
+                    return isObject(foundItem)
+                        ? this.compile({ data: { ...foundItem }, context: context })
+                        : foundItem
+                })
+                .filter(item => item !== null)
+
             data[`${prefix}${pluralizedKey}`] = relatedItems
 
             delete data[key]
@@ -79,14 +95,15 @@ export class DataCompiler {
         context,
         data,
         key,
-        prefix
+        prefix,
+        dataCopy
     }: ProcessIdSuffixOptions) {
         const baseKey = key.slice(prefix.length).slice(0, -this.idSuffix.length)
         const pluralizedKey = pluralize(baseKey)
-    
+
         if (context[pluralizedKey]) {
-            const foundItem = context[pluralizedKey].find((item: any) => item.id === data[key])
-    
+            const foundItem = context[pluralizedKey].find((item: any) => item.id === dataCopy[key])
+
             data[`${prefix}${baseKey}`] = foundItem ? this.compile({ data: foundItem, context: context }) : null
             delete data[key]
         }
@@ -95,13 +112,13 @@ export class DataCompiler {
     private isArrayOfObjects(value: any): boolean {
         return Array.isArray(value) && value.every(item => isObject(item))
     }
-    
+
     public compileMany({ data, context }: CompileArrayOptions) {
         return data.map(item => isObject(item) ? this.compile({ data: item, context: context }) : item)
-    }    
+    }
 
     public compile({ data, context }: CompileOptions) {
-        const dataCopy = {...data}
+        const dataCopy = { ...data }
 
         try {
             for (const [key, value] of Object.entries(dataCopy)) {
@@ -116,13 +133,15 @@ export class DataCompiler {
                 if (key.endsWith(this.idsSuffix) && Array.isArray(value)) {
                     this.processIdsSuffix({
                         data: data,
+                        dataCopy: dataCopy,
                         key: key,
                         prefix: matchedPrefix,
-                        context: context
+                        context: context,
                     })
                 } else if (key.endsWith(this.idSuffix) && value) {
                     this.processIdSuffix({
                         data: data,
+                        dataCopy: dataCopy,
                         key: key,
                         prefix: matchedPrefix,
                         context: context
