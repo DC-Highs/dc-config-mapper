@@ -24,8 +24,8 @@ export const mazeIslandsPathSchema = z.object({
         has_new_badge: numberToBoolean(data.new_badge),
         node_ids: data.nodes,
         availability: data.availability ? {
-            from: new Date(data.availability.from).toISOString(),
-            to: new Date(data.availability.to).toISOString(),
+            from: new Date(data.availability.from * 1000).toISOString(),
+            to: new Date(data.availability.to * 1000).toISOString(),
         } : undefined,
     }
 })
