@@ -1,41 +1,6 @@
-import { GameConfigDto } from "@dchighs/dc-config"
 import { z } from "zod"
 
-import { RewardResourceType } from "../../../enums/reward-resource-type.enum"
-
-type Reward = GameConfigDto["game_data"]["config"]["maze_island"]["rewards"][number]["reward"][number]
-
-function processReward(reward: Reward) {
-    if (reward?.f) {
-        return {
-            type: RewardResourceType.Food,
-            amount: reward.f,
-        }
-    }
-
-    if (reward?.g) {
-        return {
-            type: RewardResourceType.Gold,
-            amount: reward.g,
-        }
-    }
-
-    if (reward?.chest) {
-        return {
-            type: RewardResourceType.Chest,
-            chest_id: reward.chest,
-        }
-    }
-
-    if (reward?.b) {
-        return {
-            type: RewardResourceType.Building,
-            building_id: reward.b,
-        }
-    }
-
-    throw new Error(`Invalid reward: ${JSON.stringify(reward)}`)
-}
+import { processRewards } from "../../../utils"
 
 export const mazeIslandsNodeSchema = z.object({
     id: z.number(),
@@ -60,7 +25,7 @@ export const mazeIslandsNodeSchema = z.object({
     return {
         id: data.id,
         cost: data.cost?.ep ?? 0,
-        rewards: data.reward ? data.reward.map(processReward) : undefined,
+        rewards: data.reward ? processRewards(data.reward) : undefined,
         is_highlighted: data.highlighted,
         key_path_id: data.key,
         encounter_id: data.encounter,

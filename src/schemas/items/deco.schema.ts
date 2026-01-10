@@ -1,34 +1,6 @@
 import { z } from "zod"
 
-import { numberToBoolean } from "../../utils"
-import { CostType } from "../../enums"
-
-const processPrice = (priceObj: Record<string, number>) => {
-    const keys = Object.keys(priceObj)
-
-    if (keys.length === 0) return null
-
-    if (keys.length > 1) {
-        throw new Error(`Unexpected multiple price keys: ${JSON.stringify(priceObj)}`)
-    }
-
-    const key = keys[0]
-    const amount = priceObj[key]
-
-    const typeMap: Record<string, string> = {
-        [CostType.Gold]: "gold",
-        [CostType.Gem]: "gem",
-    }
-
-    if (!typeMap[key]) {
-        throw new Error(`Unexpected price key: ${key}`)
-    }
-
-    return {
-        type: typeMap[key],
-        amount: amount,
-    }
-}
+import { numberToBoolean, processPrice } from "../../utils"
 
 export const decoSchema = z.object({
     id: z.number(),

@@ -1,25 +1,6 @@
 import { z } from "zod"
 
-import { numberToBoolean } from "../../../utils"
-
-/*
-{
-                    id: number;
-                    type: string;
-                    highlight: number;
-                    x: number;
-                    y: number;
-                    island_id: number;
-                    ixy: string;
-                    rewards_array?: Array<{
-                        chest?: number;
-                        egg?: number;
-                    }>;
-                    wall?: string;
-                    catapult_destination_square_id?: number;
-                    piece_reward_id?: number;
-                }
-*/
+import { numberToBoolean, processRewards } from "../../../utils"
 
 export const towerIslandsSquareSchema = z.object({
     id: z.number(),
@@ -46,7 +27,7 @@ export const towerIslandsSquareSchema = z.object({
         x: data.x,
         y: data.y,
         ixy: data.ixy,
-        rewards: data.rewards_array,
+        rewards: data.rewards_array ? processRewards(data.rewards_array) : null,
         wall: data.wall,
         catapult_destination_square_id: data.catapult_destination_square_id,
         piece_reward_id: data.piece_reward_id,

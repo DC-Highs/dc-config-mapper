@@ -1,26 +1,6 @@
-import { GameConfigDto } from "@dchighs/dc-config"
 import { z } from "zod"
-import { RewardResourceType } from "../../../enums/reward-resource-type.enum"
 
-type RewardItem = GameConfigDto["game_data"]["config"]["heroic_races"]["rewards"][number]["rewards"][number]
-
-function processReward(reward: RewardItem) {
-    if (reward.c) {
-        return {
-            type: RewardResourceType.Gem,
-            amount: reward.c,
-        }
-    }
-
-    if (reward.egg) {
-        return {
-            type: RewardResourceType.Dragon,
-            dragon_ids: reward.egg,
-        }
-    }
-
-    throw new Error(`Invalid reward: ${JSON.stringify(reward)}`)
-}
+import { processRewards } from "../../../utils"
 
 export const heroicRacesRewardSchema = z.object({
     id: z.number(),
@@ -35,6 +15,6 @@ export const heroicRacesRewardSchema = z.object({
     return {
         id: data.id,
         positions: data.positions,
-        rewards: data.rewards.map(processReward),
+        reward: processRewards(data.rewards),
     }
 })

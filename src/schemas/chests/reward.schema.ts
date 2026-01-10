@@ -1,65 +1,5 @@
-import { GameConfigDto } from "@dchighs/dc-config"
 import { z } from "zod"
-
-import { RewardResourceType } from "../../enums/reward-resource-type.enum"
-import { elementMap } from "../../utils/element-map.util"
-
-type RewardResouceDto = GameConfigDto["game_data"]["config"]["chests"]["rewards"][number]["reward"]["resource"]
-
-function processReward(rewardResource: RewardResouceDto) {
-    if (!rewardResource) {
-        return
-    }
-
-    if (rewardResource?.c) {
-        return {
-            type: RewardResourceType.Gem,
-            amount: rewardResource.c,
-        }
-    }
-
-    if (rewardResource?.f) {
-        return {
-            type: RewardResourceType.Food,
-            amount: rewardResource.f,
-        }
-    }
-
-    if (rewardResource?.g) {
-        return {
-            type: RewardResourceType.Gold,
-            amount: rewardResource.g,
-        }
-    }
-
-    const tokenKey = Object.keys(rewardResource).find((key) => key.endsWith("_token"))
-
-    if (tokenKey) {
-        const elementAcronym = tokenKey.replace("_token", "")
-
-        return {
-            type: RewardResourceType.HabitatToken,
-            element: elementMap[elementAcronym],
-            amount: rewardResource[tokenKey as keyof RewardResouceDto],
-        }
-    }
-
-    if (rewardResource?.ep) {
-        return {
-            type: RewardResourceType.IslandCoin,
-            amount: rewardResource.ep,
-        }
-    }
-
-    if (rewardResource?.x) {
-        return {
-            type: RewardResourceType.Xp,
-            amount: rewardResource.x,
-        }
-    }
-
-    throw new Error(`Invalid reward resource: ${JSON.stringify(rewardResource)}`)
-}
+import { processRewards } from "../../utils"
 
 export const chestRewardSchema = z.object({
     id: z.number(),
@@ -106,7 +46,7 @@ export const chestRewardSchema = z.object({
     weight: z.number(),
 }).strict().transform((data) => {
     const reward = {
-        resource: data.reward.resource ? processReward(data.reward.resource) : undefined,
+        resource: data.reward.resource ? processRewards([data.reward.resource])[0] : undefined,
         building_ids: data.reward.buildings,
         eggs_ids: data.reward.eggs,
         seeds: data.reward.seeds,
