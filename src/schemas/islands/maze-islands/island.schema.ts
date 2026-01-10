@@ -40,6 +40,7 @@ export const mazeIslandSchema = z.object({
     return {
         id: data.id,
         name: data.name,
+        name_key: data.tid_name,
         availability: {
             from: new Date(data.availability.from * 1000).toISOString(),
             to: new Date(data.availability.to * 1000).toISOString(),
