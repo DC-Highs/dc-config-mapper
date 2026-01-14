@@ -1,5 +1,7 @@
 import { z } from "zod"
 
+import { numberToBoolean } from "../../../utils"
+
 export const gridIslandsSquareSchema = z.object({
     id: z.number(),
     type: z.string(),
@@ -24,7 +26,7 @@ export const gridIslandsSquareSchema = z.object({
                 dragon_id: data.type_id,
             })
         },
-        highlight: data.highlight,
+        is_highlight: numberToBoolean(data.highlight),
         x: data.x,
         y: data.y,
         claim_cost: data.claim_cost,
