@@ -56,7 +56,6 @@ export const towerIslandSchema = z.object({
         initial_points: data.initial_points,
         currency_id: data.currency_id,
         min_level: data.min_level,
-        tower_size: data.tower_size,
         zip_file_name: path.basename(data.zip_file),
         sound_tag: data.sound_tag,
         max_die_roll: data.max_die_roll,
@@ -64,6 +63,10 @@ export const towerIslandSchema = z.object({
         square_ids: data.square_ids,
         floor_ids: data.floor_ids,
         reward_ids: data.reward_ids,
+        board_size: {
+            width: data.tower_size[0],
+            height: data.tower_size[1],
+        },
     }
 })
     

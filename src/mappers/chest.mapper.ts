@@ -5,10 +5,12 @@ import { z } from "zod"
 
 import { chestSchema } from "../schemas/chests/chest.schema"
 
+type Reward = GameConfigDto["game_data"]["config"]["chests"]["rewards"][number]
+
 export class ChestsMapper {
     constructor(readonly localization: Localization) {}
 
-    private resolveRewards(rewardIds: number[], rewards: GameConfigDto["game_data"]["config"]["chests"]["rewards"]) {
+    private resolveRewards(rewardIds: number[], rewards: Reward[]) {
         return rewardIds.map(rewardId => {
             const reward = rewards.find(reward => reward.id === rewardId)
 

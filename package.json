@@ -17,7 +17,8 @@
     "dc highs"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "playground": "ts-node ./playground/index.ts"
   },
   "author": "Marcuth",
   "license": "MIT",
