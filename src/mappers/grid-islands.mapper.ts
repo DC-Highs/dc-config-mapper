@@ -15,7 +15,18 @@ export class GridIslandsMapper {
     map(gridIslands: GridIslandsDto) {
         return {
             islands: gridIslands.islands.map(island => this.localization.translate(gridIslandSchema.parse(island))),
-            episodes: gridIslands.episodes.map(episode => this.localization.translate(gridIslandsEpisodeSchema.parse(episode))),
+            episodes: gridIslands.episodes.map(episode => {
+                const decorationIds = gridIslands.decorations
+                    .filter(decoration => decoration.episode_id === episode.id)
+                    .map(decoration => decoration.id)
+
+                return this.localization.translate(
+                    gridIslandsEpisodeSchema.parse({
+                        ...episode,
+                        decoration_ids: decorationIds
+                    })
+                )
+            }),
             squares: gridIslands.squares.map(square => gridIslandsSquareSchema.parse(square)),
             decorations: gridIslands.decorations.map(decoration => gridIslandsDecorationSchema.parse(decoration)),
             encounters: gridIslands.encounters.map(encounter => gridIslandsEncounterSchema.parse(encounter)),

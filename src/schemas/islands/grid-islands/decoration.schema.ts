@@ -13,7 +13,5 @@ export const gridIslandsDecorationSchema = z.object({
         filename: data.file,
         x: data.x,
         y: data.y,
-        island_id: data.island_id,
-        episode_id: data.episode_id,
     }
 })

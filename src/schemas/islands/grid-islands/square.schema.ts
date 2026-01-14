@@ -1,21 +1,5 @@
 import { z } from "zod"
 
-/*
-squares: Array<{
-                    id: number;
-                    type: string;
-                    type_id?: number;
-                    highlight: number;
-                    x: number;
-                    y: number;
-                    island_id: number;
-                    episode_id: number;
-                    claim_cost: number;
-                    wall?: string;
-                    wall_suffix?: string;
-                }
-*/
-
 export const gridIslandsSquareSchema = z.object({
     id: z.number(),
     type: z.string(),

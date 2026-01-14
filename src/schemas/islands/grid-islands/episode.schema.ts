@@ -15,6 +15,8 @@ export const gridIslandsEpisodeSchema = z.object({
     foregrounds: z.array(z.any()),
     foregrounds_plists: z.array(z.any()),
     squares: z.array(z.number()),
+    // injected props
+    decoration_ids: z.array(z.number())
 }).strict().transform((data) => {
     return {
         id: data.id,
@@ -26,5 +28,6 @@ export const gridIslandsEpisodeSchema = z.object({
         final_square_id: data.final_square_id,
         name_key: data.tid_title,
         square_ids: data.squares,
+        decoration_ids: data.decoration_ids,
     }
 })
