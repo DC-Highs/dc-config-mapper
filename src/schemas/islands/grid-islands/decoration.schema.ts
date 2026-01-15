@@ -10,7 +10,7 @@ export const gridIslandsDecorationSchema = z.object({
 }).strict().transform(data => {
     return {
         id: data.id,
-        filename: data.file,
+        file_name: `${data.file}.png`,
         x: data.x,
         y: data.y,
     }
