@@ -8,7 +8,7 @@ import { fogIslandsRewardSchema } from "../schemas/islands/fog-islands/reward.sc
 type FogIslandDto = GameConfigDto["game_data"]["config"]["fog_island"]
 
 export class FogIslandsMapper {
-    constructor(readonly localiztion: Localization) {}
+    constructor(readonly localization: Localization) { }
 
     map(fogIslands: FogIslandDto) {
         return {
@@ -17,7 +17,7 @@ export class FogIslandsMapper {
                     .filter(square => square.island_id === island.id)
                     .map(square => square.id)
 
-                return this.localiztion.translate(fogIslandSchema.parse({
+                return this.localization.translate(fogIslandSchema.parse({
                     ...island,
                     square_ids: squareIds,
                 }))
