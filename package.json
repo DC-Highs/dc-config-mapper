@@ -38,7 +38,7 @@
   },
   "peerDependencies": {
     "@dchighs/dc-config": "^0.0.1",
-    "@dchighs/dc-core": "^0.1.0",
-    "@dchighs/dc-localization": "^0.0.4"
+    "@dchighs/dc-core": "^0.2.0",
+    "@dchighs/dc-localization": "^0.0.5"
   }
 }
