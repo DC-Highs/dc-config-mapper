@@ -6,7 +6,11 @@ import { elementMap } from "./element-map.util"
 
 type Reward = {
     egg?: number | number[]
-} & Omit<Partial<Record<RewardAcronym, number>>, "egg">
+    seeds?: {
+        id: number
+        amount: number
+    }[]
+} & Omit<Partial<Record<RewardAcronym, number>>, "egg" | "seeds">
 
 type ProcessedReward = {
     type: RewardType
@@ -16,6 +20,7 @@ type ProcessedReward = {
     dragon_id?: number
     dragon_ids?: number[]
     building_id?: number
+    orb_dragon_id?: number
 }
 
 export function processRewards(rewards: Reward[]) {
@@ -68,6 +73,30 @@ export function processRewards(rewards: Reward[]) {
             processedRewards.push({
                 type: RewardType.Building,
                 building_id: reward.b,
+            })
+        }
+
+        if (reward.ep) {
+            processedRewards.push({
+                type: RewardType.EventPoints,
+                amount: reward.ep,
+            })
+        }
+
+        if (reward.seeds) {
+            for (const seed of reward.seeds) {
+                processedRewards.push({
+                    type: RewardType.DragonOrbs,
+                    orb_dragon_id: seed.id,
+                    amount: seed.amount,
+                })
+            }
+        }
+
+        if (reward.en_runner) {
+            processedRewards.push({
+                type: RewardType.RunnerIslandEnergy,
+                amount: reward.en_runner,
             })
         }
 

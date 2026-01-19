@@ -26,4 +26,7 @@ export enum RewardAcronym {
     SoulToken = "so_token",
     BeautyToken = "bt_token",
     DreamToken = "dr_token",
+    EventPoints = "ep",
+    Seeds = "seeds",
+    RunnerIslandEnergy = "en_runner"
 }
