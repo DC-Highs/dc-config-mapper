@@ -13,7 +13,8 @@ export const gridIslandsSquareSchema = z.object({
     episode_id: z.number(),
     claim_cost: z.number(),
     wall: z.string().optional(),
-    wall_suffix: z.string().optional()
+    wall_suffix: z.string().optional(),
+    resource: z.object().optional(),
 }).strict().transform(data => {
     return {
         id: data.id,
@@ -32,5 +33,6 @@ export const gridIslandsSquareSchema = z.object({
         cost: data.claim_cost,
         wall: data.wall,
         wall_suffix: data.wall_suffix,
+        resource: data.resource,
     }
 })

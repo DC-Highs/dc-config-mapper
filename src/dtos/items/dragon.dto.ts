@@ -60,12 +60,12 @@ export interface DragonDto {
         c?: number
         g?: number
     }
-    hatching_time_reawaken: number
-    breeding_time_reawaken: number
-    hatching_time_ngu_aggressive: number
-    breeding_time_ngu_aggressive: number
-    hatching_time_ngu_soft: number
-    breeding_time_ngu_soft: number
+    hatching_time_reawaken?: number
+    breeding_time_reawaken?: number
+    hatching_time_ngu_aggressive?: number
+    breeding_time_ngu_aggressive?: number
+    hatching_time_ngu_soft?: number
+    breeding_time_ngu_soft?: number
     dragon_ownership_id: number
     tags?: Array<string>
     speed_override?: number
