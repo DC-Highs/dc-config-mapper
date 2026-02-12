@@ -7,4 +7,5 @@ export const heroicRacesEnemySchema = z.object({
     view_type: z.string(),
     elements_view_type: z.array(z.any()),
     cooldown: z.number(),
+    enemies: z.array(z.coerce.number()).optional(),
 }).strict()
