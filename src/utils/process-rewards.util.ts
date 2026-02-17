@@ -116,7 +116,7 @@ export function processRewards(rewards: Reward[]) {
         }
     }
 
-    if (processedRewards.length === 0) {
+    if (processedRewards.length !== rewards.length) {
         throw new Error(`No rewards found: ${JSON.stringify(rewards)}`)
     }
 
