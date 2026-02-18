@@ -64,8 +64,8 @@ export function processRewards(rewards: Reward[]) {
 
         if (reward.f) {
             processedRewards.push({
-                type: RewardType.Gem,
-                amount: reward.c,
+                type: RewardType.Food,
+                amount: reward.f,
             })
         }
 
@@ -116,8 +116,8 @@ export function processRewards(rewards: Reward[]) {
         }
     }
 
-    if (processedRewards.length !== rewards.length) {
-        throw new Error(`No rewards found: ${JSON.stringify(rewards)}`)
+    if (processedRewards.length < rewards.length) {
+        throw new Error(`Not processed correctly: ${JSON.stringify(rewards)} -> ${JSON.stringify(processedRewards)}`)
     }
 
     return processedRewards
