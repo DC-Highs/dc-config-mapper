@@ -28,5 +28,9 @@ export enum RewardAcronym {
     DreamToken = "dr_token",
     EventPoints = "ep",
     Seeds = "seeds",
-    RunnerIslandEnergy = "en_runner"
+    RunnerIslandEnergy = "en_runner",
+    PetFoodPackSmall = "pet_food_pack.s",
+    PetFoodPackMedium = "pet_food_pack.m",
+    PetFoodPackLarge = "pet_food_pack.l",
+    PetFoodPackExtraLarge = "pet_food_pack.xl",
 }

@@ -11,7 +11,7 @@ export const mazeIslandsNodeSchema = z.object({
     reward_id: z.number().optional(),
     reward: z.array(z.object({
         chest: z.number().optional(),
-        b: z.number().optional(),
+        b: z.union([z.number(), z.array(z.number())]).optional(),
         f: z.number().optional(),
         g: z.number().optional(),
     })).optional(),

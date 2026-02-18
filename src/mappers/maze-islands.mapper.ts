@@ -23,7 +23,10 @@ export class MazeIslandsMapper {
             encounters: data.encounters,
             enemies: data.enemies,
             islands: data.islands.map(island => this.localization.translate(mazeIslandSchema.parse(island))),
-            nodes: data.nodes.map(node => this.localization.translate(mazeIslandsNodeSchema.parse(node))),
+            nodes: data.nodes.map((node, i) => {
+                console.log("Node", i, node)
+                return this.localization.translate(mazeIslandsNodeSchema.parse(node))
+            }),
             parameters: data.parameters,
         } satisfies Record<keyof MazeIslandsDto, any>
     }

@@ -9,5 +9,7 @@ export enum RewardType {
     IslandCoin = "island_coin",
     EventPoints = "event_points",
     DragonOrbs = "dragon_orbs",
-    RunnerIslandEnergy = "runner_island_energy"
+    RunnerIslandEnergy = "runner_island_energy",
+    PetFoodPack = "pet_food_pack",
+    AlbumPackAces = "album_pack_aces",
 }
