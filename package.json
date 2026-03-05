@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "test": "vitest run",
     "playground": "ts-node ./playground/index.ts"
   },
   "author": "Marcuth",
@@ -26,10 +27,12 @@
   "devDependencies": {
     "@marcuth/env": "^0.0.1",
     "@types/lodash": "^4.17.21",
-    "@types/node": "^25.0.3",
+    "@types/node": "^25.3.3",
     "@types/pluralize": "^0.0.33",
+    "ts-morph": "^27.0.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   },
   "dependencies": {
     "lodash": "^4.17.21",

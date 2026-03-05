@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2019",
-    "lib": ["ES2015"],
+    "lib": [
+      "ES2015"
+    ],
     "module": "NodeNext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -12,6 +14,11 @@
     "declaration": true,
     "declarationMap": false,
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

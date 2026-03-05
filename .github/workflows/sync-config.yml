@@ -1,0 +1,64 @@
+name: Daily Config Sync
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Daily at midnight
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+
+      - name: Run Schema Sync
+        run: npx ts-node scripts/sync.ts
+        env:
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          USER_ID: ${{ secrets.USER_ID }}
+          URL: ${{ secrets.URL }}
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git add .
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and Push
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -m "chore: auto-update schemas from game config"
+          git push origin main
+
+      - name: Publish Patch to NPM
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          npm version patch -m "chore: release %s [skip ci]"
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Notify Discord
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          curl -H "Content-Type: application/json" \
+               -d "{\"content\": \"🚀 **@dchighs/dc-config-mapper** updated to v${VERSION}! New properties detected in Dragon City config and schemas were updated automatically.\"}" \
+               ${{ secrets.DISCORD_WEBHOOK_URL }}
