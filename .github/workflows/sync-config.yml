@@ -29,6 +29,13 @@ jobs:
           GAME_USER_ID: ${{ secrets.GAME_USER_ID }}
           GAME_CONFIG_URL: ${{ secrets.GAME_CONFIG_URL }}
 
+      - name: Run Vitest
+        run: npm run test
+        env:
+          GAME_AUTH_TOKEN: ${{ secrets.GAME_AUTH_TOKEN }}
+          GAME_USER_ID: ${{ secrets.GAME_USER_ID }}
+          GAME_CONFIG_URL: ${{ secrets.GAME_CONFIG_URL }}
+
       - name: Check for changes
         id: git-check
         run: |
@@ -54,7 +61,7 @@ jobs:
           npm version patch -m "chore: release %s [skip ci]"
           npm publish
         env:
-          NODE_GAME_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Notify Discord
         if: steps.git-check.outputs.changes == 'true'
