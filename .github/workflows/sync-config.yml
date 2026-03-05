@@ -2,7 +2,7 @@ name: Daily Config Sync
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Daily at midnight
+    - cron: '0 12 * * *' # Daily at 13:00 (Spain/CET)
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -25,9 +25,9 @@ jobs:
       - name: Run Schema Sync
         run: npx ts-node scripts/sync.ts
         env:
-          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
-          USER_ID: ${{ secrets.USER_ID }}
-          URL: ${{ secrets.URL }}
+          GAME_AUTH_TOKEN: ${{ secrets.GAME_AUTH_TOKEN }}
+          GAME_USER_ID: ${{ secrets.GAME_USER_ID }}
+          GAME_CONFIG_URL: ${{ secrets.GAME_CONFIG_URL }}
 
       - name: Check for changes
         id: git-check
@@ -50,10 +50,11 @@ jobs:
       - name: Publish Patch to NPM
         if: steps.git-check.outputs.changes == 'true'
         run: |
+          npm run build
           npm version patch -m "chore: release %s [skip ci]"
           npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_GAME_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Notify Discord
         if: steps.git-check.outputs.changes == 'true'

@@ -36,12 +36,12 @@ async function main() {
 
     // Load Config
     let configData: any
-    if (env("AUTH_TOKEN") && env("USER_ID") && env("URL")) {
+    if (env("GAME_AUTH_TOKEN") && env("GAME_USER_ID") && env("GAME_CONFIG_URL")) {
         console.log("Fetching remote config...")
         const config = await Config.create({
-            authToken: env("AUTH_TOKEN"),
-            userId: env("USER_ID"),
-            url: env("URL"),
+            authToken: env("GAME_AUTH_TOKEN"),
+            userId: env("GAME_USER_ID"),
+            url: env("GAME_CONFIG_URL"),
             language: "br",
         })
         configData = config.data

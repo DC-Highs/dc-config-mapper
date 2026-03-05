@@ -29,9 +29,9 @@ import { ChestsMapper } from "@dchighs/dc-config-mapper"
 import { Localization } from "@dchighs/dc-localization"
 
 ;(async () => {
-	const userId = process.env.USER_ID
-	const authToken = process.env.AUTH_TOKEN
-	const url = process.env.URL
+	const userId = process.env.GAME_GAME_USER_ID
+	const authToken = process.env.GAME_GAME_AUTH_TOKEN
+	const url = process.env.GAME_CONFIG_URL
 
 	const config = await Config.create({
 		userId: userId,
