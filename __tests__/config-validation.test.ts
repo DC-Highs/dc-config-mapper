@@ -25,6 +25,8 @@ describe("Config Validation", async () => {
         configData = JSON.parse(fs.readFileSync(configPath, "utf-8"))
     } else {
         if (env("GAME_AUTH_TOKEN") && env("GAME_USER_ID") && env("GAME_CONFIG_URL")) {
+            console.log("Fetching and saving config from remote...")
+
             const config = await Config.create({
                 authToken: env("GAME_AUTH_TOKEN"),
                 userId: env("GAME_USER_ID"),
@@ -33,6 +35,8 @@ describe("Config Validation", async () => {
             })
 
             configData = config.data
+
+            fs.writeFileSync(configPath, JSON.stringify(configData, null, 4))
         } else {
             console.warn("No config.json found and no credentials provided. Skipping remote fetch.")
         }
@@ -42,6 +46,7 @@ describe("Config Validation", async () => {
         it("should have config data", () => {
             expect(configData).toBeDefined()
         })
+
         return
     }
 
