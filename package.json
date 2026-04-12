@@ -1,6 +1,6 @@
 {
   "name": "@dchighs/dc-config-mapper",
-  "version": "0.5.9",
+  "version": "0.5.10",
   "description": "A opined library to restructure and populate configuration for Dragon City.",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -40,8 +40,8 @@
     "zod": "^4.3.6"
   },
   "peerDependencies": {
-    "@dchighs/dc-config": "^0.0.6",
-    "@dchighs/dc-core": "^0.3.0",
-    "@dchighs/dc-localization": "^0.0.6"
+    "@dchighs/dc-config": "file:../dc-config",
+    "@dchighs/dc-core": "file:../dc-core",
+    "@dchighs/dc-localization": "file:../dc-localization"
   }
 }
