@@ -15,6 +15,7 @@ export const chestSchema = z.object({
     pool_size: z.number(),
     gatcha_ids: z.array(z.number()).optional(),
     instant: z.any(),
+    foreground_asset: z.string().optional(),
 }).strict().transform((data) => {
     return {
         id: data.id,
@@ -28,5 +29,6 @@ export const chestSchema = z.object({
         default_reward_id: data.default_reward,
         pool_size: data.pool_size,
         gatcha_ids: data.gatcha_ids,
+        foreground_asset: data.foreground_asset,
     }
 })

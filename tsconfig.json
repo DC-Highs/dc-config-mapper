@@ -13,6 +13,7 @@
     "rootDir": "./src",
     "declaration": true,
     "declarationMap": false,
+    "preserveSymlinks": true
   },
   "include": [
     "src"

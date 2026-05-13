@@ -25,6 +25,9 @@
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
+    "@dchighs/dc-config": "file:../dc-config",
+    "@dchighs/dc-core": "file:../dc-core",
+    "@dchighs/dc-localization": "file:../dc-localization",
     "@marcuth/env": "^0.0.1",
     "@types/lodash": "^4.17.24",
     "@types/node": "^25.3.3",
@@ -40,8 +43,8 @@
     "zod": "^4.3.6"
   },
   "peerDependencies": {
-    "@dchighs/dc-config": "file:../dc-config",
-    "@dchighs/dc-core": "file:../dc-core",
-    "@dchighs/dc-localization": "file:../dc-localization"
+    "@dchighs/dc-config": "*",
+    "@dchighs/dc-core": "*",
+    "@dchighs/dc-localization": "*"
   }
 }
