@@ -1,6 +1,7 @@
 import { z } from "zod"
 
 import { numberToBoolean } from "../../../utils"
+import { fogIslandsSquareResourceSchema } from "./square-resource.schema"
 
 export const fogIslandsSquareSchema = z.object({
     id: z.number(),
@@ -13,6 +14,7 @@ export const fogIslandsSquareSchema = z.object({
     claim_cost: z.number(),
     come_back_cost: z.number(),
     reward_id: z.number().optional(),
+    resource: fogIslandsSquareResourceSchema.optional(),
 }).strict().transform(data => {
     return {
         id: data.id,
@@ -21,6 +23,8 @@ export const fogIslandsSquareSchema = z.object({
             type: data.type,
             ...(data.type === "CHEST" ? {
                 chest_id: data.type_id,
+            } : data.type === "RESOURCE" ? {
+                ...data.resource,
             } : {
                 piece_dragon_id: data.type_id,
             })
